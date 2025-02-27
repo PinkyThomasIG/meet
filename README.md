@@ -45,10 +45,10 @@ The development follows a **test-driven development (TDD)** approach, and the ap
   **When** the user opens the app;  
    **Then** Then the user should see a list of upcoming events.
 
-  - **Scenario 2:** User should see a list of suggestions when they search for a city.
-    **Given** the main page is open;
-    **When** When user starts typing in the city textbox;
-    **Then** Then the user should receive a list of cities (suggestions) that match what they’ve typed.
+- **Scenario 2:** User should see a list of suggestions when they search for a city.
+  **Given** the main page is open;
+  **When** When user starts typing in the city textbox;
+  **Then** Then the user should receive a list of cities (suggestions) that match what they’ve typed.
 
 - **Scenario 3:**User can select a city from the suggested list.
   **Given** user was typing “Berlin” in the city textbox AND the list of suggested cities is showing;

@@ -1,9 +1,9 @@
-// src/components/NumberOfEvents.js
-import React from "react";
+import React, { useState } from "react";
 
 const NumberOfEvents = ({ numberOfEvents, onNumberOfEventsChange }) => {
   const handleChange = (event) => {
-    onNumberOfEventsChange(event.target.value); // Calling the passed function
+    const newValue = event.target.value;
+    onNumberOfEventsChange(newValue); // Calling the passed function
   };
 
   return (

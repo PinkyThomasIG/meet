@@ -57,90 +57,50 @@ The development follows a **test-driven development (TDD)** approach, and the ap
 
 ### 2. Show/Hide Event Details
 
-- **Scenario 1:** Event details are hidden by default.
-  **Given** the user is viewing the event list;
-  **When** the app loads;
-  **Then** each event should display only the title, date, and location.
+- **Scenario 1:** An event element is collapsed by default
+  **Given** An event element is collapsed by default
+  **When** the event list is displayed
+  **Then** each event should have its details collapsed by default
 
-- **Scenario 2:** Expand event details on user interaction.
-  **Given** the user is viewing an event in the list;
-  **When** the user clicks/show on the event;
-  **Then** the event should expand to show additional details.
-
-- **Scenario 3:** Collapse expanded event details.
-  **Given** an event is expanded;
-  **When** the user clicks/taps on the event again;
-  **Then** the details should collapse.
-
-- **Scenario 4:** Only one event should expand at a time.
-  **Given** an event is already expanded;
-  **When** the user expands a different event;
-  **Then** the previously expanded event should collapse.
+- **Scenario 2:**User can expand an event to see details
+  **Given** User can expand an event to see details
+  **When** the user clicks on an event
+  **Then** the event details should expand and become visible
 
 ### 3. Specify Number of Events
 
-- **Scenario 1:** Default number of events is displayed when app loads.
-  **Given** the user opens the app for the first time;
+- **Scenario 1:** When user hasn’t specified a number, 32 events are shown by default
+  **Given** the user has not set a specific number of events to display
   **When** the event list is displayed;
-  **Then** the default number of events (e.g., 20) should be shown.
+  **Then** 32 events should be displayed by default
 
-- **Scenario 2:** User can change the number of displayed events.
-  **Given** the user is viewing the event list;
-  **When** the user selects a number (e.g., 10) from a dropdown or input field;
-  **Then** the event list should update to show only the selected number of events.
-
-- **Scenario 3:** The number of events updates dynamically.
-  **Given** the user has selected 10 events;
-  **When** the user changes the selection to 20;
-  **Then** the event list should immediately update.
+- **Scenario 2:** User can change the number of events displayed
+  **Given** the user is viewing the event list
+  **When** the user specifies a different number of events (e.g., 10)
+  **Then** the event list should update to show the specified number of events
 
 ### 4. Use the App When Offline
 
-- **Scenario 1:** Display cached events when offline.
-  **Given** the user is offline;
-  **When** the user opens the app;
-  **Then** the app should display previously fetched events from cache.
+- **Scenario 1:** Show cached data when there’s no internet connection
+  **Given** the user has previously loaded events while online
+  **When** the user opens the app without an internet connection
+  **Then** the app should display the last cached events
 
-- **Scenario 2:** Show an offline indicator..
-  **Given** the user has lost internet connectivity;
-  **When** the app attempts to fetch new data;
-  **Then** an "Offline Mode" message should appear.
+- **Scenario 2:** Show error when user changes search settings (city, number of events)
+  **Given** the user is offline
+  **When** the user tries to change the search settings (e.g., city or number of events)
+  **Then** the app should display an error message indicating that changes cannot be made while offline
 
 ### 5. Add an App Shortcut to the Home Screen
 
-- **Scenario 1:** Prompt user to install the app.
-  **Given** the user is visiting the PWA in a compatible browser;
-  **When** the app detects installation is possible;
-  **Then** the user should see an "Add to Home Screen" prompt.
-
-- **Scenario 2**: Install the PWA successfully.
-  **Given** the user clicks "Add to Home Screen";
-  **When** the installation process is completed;
-  **Then** the app should be available as an icon on the user's home screen.
-
-- **Scenario 3:** Open the app from the home screen.
-  **Given** the app is installed on the home screen;
-  **When** the user taps the app icon;
-  **Then** the app should open in fullscreen mode without the browser UI.
+- **Scenario 1:** User can install the meet app as a shortcut on their device home screen
+  **Given** the user is using a compatible browser or device
+  **When** the user selects the option to add the app shortcut to the home screen
+  **Then**the app should be added as a shortcut on the user's home screen
 
 ### 6. Display Charts Visualizing Event Details
 
-- **Scenario 1:** Show a loading state before charts appear.
-  **Given** the user is viewing the statistics page;
-  **When** the app fetches data;
-  **Then** a loading indicator should be displayed until the charts are ready.
-
-- **Scenario 2:** Display a chart of event categories.
-  **Given** the user is viewing events;
-  **When** the app processes event data;
-  **Then** a chart should show the distribution of event categories
-
-- **Scenario 2:** Display a chart of event categories.
-  **Given** the user is viewing events;
-  **When** the app processes event data;
-  **Then** a chart should show the distribution of event categories
-
-- **Scenario 4:** Update charts when event filters change.
-  **Given** the user has selected a new city or changed the number of events;
-  **When** the event list updates;
-  **Then** the chart should also update accordingly.
+- **Scenario 1:** Show a chart with the number of upcoming events in each city
+  **Given** the user is viewing the event list
+  **When** the app loads the event data
+  **Then** a chart should be displayed showing the number of upcoming events for each city

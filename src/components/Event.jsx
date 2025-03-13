@@ -1,30 +1,23 @@
 import React, { useState } from "react";
 
 const Event = ({ event }) => {
-  // State to toggle visibility of event details
-  const [showDetails, setShowDetails] = useState(false);
-
-  // Format the start time using toLocaleString for better readability
-  const startTime = new Date(event.start.dateTime).toLocaleString();
-
-  const handleToggleDetails = () => {
-    setShowDetails(!showDetails);
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const toggleDetails = () => {
+    setIsDetailVisible((prev) => !prev);
   };
-
   return (
-    <li>
-      {/* Rendering the event's title (summary) */}
-      <h3>{event.summary}</h3>
-      <p>{startTime}</p> {/* Render the start time */}
-      <p>{event.location}</p> {/* Render the event location */}
-      {/* Show the "Show Details" button or "Hide Details" based on state */}
-      <button onClick={handleToggleDetails}>
-        {showDetails ? "Hide details" : "Show details"}
+    <li className="event-item">
+      <h3 className="event-title">{event.summary}</h3> {/* Event Title */}
+      <p className="event-start-time">{event.start.dateTime}</p>{" "}
+      {/* Event Start Time */}
+      <p className="event-location">{event.location}</p> {/* Event Location */}
+      <button className="show-details-btn" onClick={toggleDetails}>
+        {isDetailVisible ? "Hide Details" : "Show Details"}
       </button>
-      {/* Render the event description if details are visible */}
-      {showDetails && <p>{event.description}</p>}
+      {isDetailVisible && (
+        <p className="event-description">{event.description}</p>
+      )}
     </li>
   );
 };
-
 export default Event;

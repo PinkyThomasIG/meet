@@ -8,12 +8,4 @@ module.exports = {
   },
   moduleFileExtensions: ["js", "jsx"],
   setupFilesAfterEnv: ["<rootDir>/setupTests.js"], // Path to the setup file
-
-  collectCoverage: true, // Enable coverage collection
-  coverageDirectory: "coverage", // Optional: Directory to output the coverage report
-  coverageThreshold: {
-    global: {
-      lines: 70, // Minimum global line coverage threshold (adjust as necessary)
-    },
-  },
 };

@@ -1,7 +1,6 @@
+import { render } from "@testing-library/react";
 import React from "react";
-import { render, screen } from "@testing-library/react";
 import App from "../App";
-import NumberOfEvents from "../components/NumberOfEvents";
 
 describe("<App /> component", () => {
   let AppDOM;
@@ -18,14 +17,8 @@ describe("<App /> component", () => {
   });
 
   test("renders NumberOfEvents component", () => {
-    // Render the App component
-    const { container } = render(<App />);
-
-    // Find the NumberOfEvents component using querySelector and its id
-    const numberOfEventsComponent =
-      container.firstChild.querySelector("#number-of-events");
-
-    // Check if the NumberOfEvents component is in the document
-    expect(numberOfEventsComponent).toBeInTheDocument();
+    // Querying the NumberOfEvents component using screen.getByRole
+    const numberOfEventsInput = screen.getByRole("textbox");
+    expect(numberOfEventsInput).toBeInTheDocument();
   });
 });

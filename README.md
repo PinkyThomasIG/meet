@@ -62,10 +62,15 @@ The development follows a **test-driven development (TDD)** approach, and the ap
   **When** the event list is displayed
   **Then** each event should have its details collapsed by default
 
-- **Scenario 2:**User can expand an event to see details
+- **Scenario 2:** User can expand an event to see details
   **Given** User can expand an event to see details
   **When** the user clicks on an event
   **Then** the event details should expand and become visible
+
+  - **Scenario 3:** User can collapse an event to hide details
+    **Given** the user has expanded an event to view its details
+    **When** the user clicks on the event again to collapse it
+    **Then** the event details should be hidden, and only the summary should be visible
 
 ### 3. Specify Number of Events
 

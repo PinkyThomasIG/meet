@@ -67,10 +67,10 @@ The development follows a **test-driven development (TDD)** approach, and the ap
   **When** the user clicks on an event
   **Then** the event details should expand and become visible
 
-  - **Scenario 3:** User can collapse an event to hide details
-    **Given** the user has expanded an event to view its details
-    **When** the user clicks on the event again to collapse it
-    **Then** the event details should be hidden, and only the summary should be visible
+- **Scenario 3:** User can collapse an event to hide details
+  **Given** the user has expanded an event to view its details
+  **When** the user clicks on the event again to collapse it
+  **Then** the event details should be hidden, and only the summary should be visible
 
 ### 3. Specify Number of Events
 

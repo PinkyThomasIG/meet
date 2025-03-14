@@ -1,27 +1,47 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import NumberOfEvents from "../components/NumberOfEvents"; // Adjust the path accordingly
+import React from "react";
+import userEvent from "@testing-library/user-event";
+import NumberOfEvents from "../components/NumberOfEvents";
+import mockData from "../mock-data";
 
-describe("NumberOfEvents component", () => {
-  // Test to ensure that the default value of the input field is 32
-  test("default value of the input field is 32", () => {
-    render(<NumberOfEvents updateNumberOfEvents={() => {}} />);
-    // Access the input field by role
-    const input = screen.getByRole("textbox");
-    // Check if the input's value is '32' by default
-    expect(input.value).toBe("32");
+describe("<NumberOfEvents /> component", () => {
+  test("should contain an element with the role of textbox", () => {
+    const { container } = render(
+      <NumberOfEvents updateEventCount={() => {}} />
+    );
+    const inputElement = container.querySelector('input[type="number"]');
+    expect(inputElement).toBeInTheDocument(); // Check if the input element is rendered
   });
 
-  test("input field value changes when user types", async () => {
-    render(<NumberOfEvents updateNumberOfEvents={() => {}} />);
+  describe("<NumberOfEvents /> component", () => {
+    test("NumberOfEvents component's input field has a default value of 32", () => {
+      const { container } = render(
+        <NumberOfEvents updateEventCount={() => {}} />
+      );
+      const inputElement = container.querySelector('input[type="number"]'); // Select the input element
+      expect(inputElement).toHaveValue(32); // Assert that the value of the input is 32 by default
+    });
+  });
+  test("NumberOfEvents component's input field value changes when user types", async () => {
+    const updateEventCount = jest.fn(); // Mock the updateEventCount function
+    const { container } = render(
+      <NumberOfEvents updateEventCount={updateEventCount} />
+    ); // Render the component
 
-    // Access the input field
-    const inputField = screen.getByRole("textbox");
+    const inputElement = container.querySelector('input[type="number"]'); // Get the input element
 
-    // Simulate user typing backspace twice and then typing '10'
-    await userEvent.type(inputField, "{backspace}{backspace}10");
+    const user = userEvent.setup(); // Initialize userEvent setup
 
-    // Check that the input field's value has been updated to '10'
-    expect(inputField.value).toBe("10");
+    // Clear the current value of the input field
+    await user.clear(inputElement);
+
+    // Type in '10'
+    await user.type(inputElement, "10");
+
+    // Ensure the value of the input field is now '10'
+    expect(inputElement).toHaveValue(10);
+
+    // Optionally, check if the updateEventCount function was called with the correct value
+    expect(updateEventCount).toHaveBeenCalledWith(10);
   });
 });

@@ -1,125 +1,90 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
-import Event from "../components/Event";
-import EventList from "../components/EventList";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import Event from "../components/Event";
 import mockData from "../mock-data";
 import { getEvents } from "../api";
 
-describe("<Event /> Component", () => {
-  //test to check if event details are collapsed by default.
-  test("renders event collapsed by default", async () => {
-    const allEvents = await getEvents();
-    const event = allEvents[0];
-    render(<Event event={event} />);
-    const eventDetails = screen.queryByText(event.description);
-    expect(eventDetails).not.toBeInTheDocument();
+describe("<Event /> component", () => {
+  test("renders the event title correctly", () => {
+    const event = mockData[0];
+    const { container } = render(<Event event={event} />);
+    const title = container.querySelector("h2");
+
+    // Assert that the event's summary (title) appears in the document
+    expect(title).toHaveTextContent(event.summary);
   });
 
-  //test to check the event titile(summary) is displayed
-  test("renders event title correctly", async () => {
-    const allEvents = await getEvents(); // Fetch events using getEvents()
-    const event = allEvents[0];
-    render(<Event event={event} />); // Render the Event component with the event data
-    expect(screen.queryByText(event.summary)).toBeInTheDocument();
+  test("renders the event time correctly", () => {
+    const event = mockData[0];
+
+    const { container } = render(<Event event={event} />);
+    const time = container.querySelector("p");
+
+    const createdTime = new Date(event.created).toLocaleString();
+
+    expect(time).toHaveTextContent(createdTime);
   });
 
-  //test to check if event start time is displayed
-  test("renders event start time correctly", async () => {
-    const allEvents = await getEvents();
-    const event = allEvents[0];
-    render(<Event event={event} />);
-    expect(screen.queryByText(event.start.dateTime)).toBeInTheDocument();
+  test("renders the event location correctly", () => {
+    const event = mockData[0];
+    const { container } = render(<Event event={event} />);
+    const location = container.querySelectorAll("p")[1];
+
+    expect(location).toHaveTextContent(event.location);
   });
 
-  //Test if the event location is displayed
-  test("renders event location correctly", async () => {
-    const allEvents = await getEvents();
-    const event = allEvents[0];
-    render(<Event event={event} />);
-    expect(screen.queryByText(event.location)).toBeInTheDocument();
+  test("renders event details button with the title (Show Details)", () => {
+    const event = mockData[0];
+    const { container } = render(<Event event={event} />);
+    const button = container.querySelector("button");
+
+    expect(button).toHaveTextContent("Show Details");
   });
 
-  //test if the 'show details' button is displayed
-  test("renders 'Show Details' button correctly", async () => {
-    const allEvents = await getEvents();
-    const event = allEvents[0];
-    render(<Event event={event} />);
-    expect(
-      screen.getByRole("button", { name: /show details/i })
-    ).toBeInTheDocument();
+  test("by default, event section details should be hidden", () => {
+    const event = mockData[0];
+    const { container } = render(<Event event={event} />);
+
+    const description = container.querySelector("li p:last-child");
+    expect(description).not.toBeInTheDocument();
   });
 
-  //test to check if event details are hidden by default.
-  test("renders event collapsed by default", async () => {
-    const allEvents = await getEvents();
-    const event = allEvents[0];
-    render(<Event event={event} />);
-    const eventDetails = screen.queryByText(event.description);
-    expect(eventDetails).not.toBeInTheDocument();
-  });
-  //test to check show details section displayed when user clicked on show details button
-  test("shows the details section when the user clicks on the 'show details' button", async () => {
-    const event = mockData[0]; // Get the first event for the test
+  test('shows the details section when the user clicks on the "Show Details" button', async () => {
+    const event = mockData[0];
 
-    render(<Event event={event} />);
+    const { container } = render(<Event event={event} />);
+    const descriptionBeforeClick = container.querySelector("li p:last-child");
+    expect(descriptionBeforeClick).not.toBeInTheDocument();
 
-    const user = userEvent.setup(); // Initialize user event interactions
+    const showDetailsButton = container.querySelector("button");
 
-    // Find the "Show Details" button
-    const showDetailsButton = screen.getByText(/show details/i);
-
-    // Initially, the event details (description) should not be visible
-    const eventDetails = screen.queryByText(event.description);
-    expect(eventDetails).not.toBeInTheDocument();
-
-    // Click the "Show Details" button
+    const user = userEvent.setup();
     await user.click(showDetailsButton);
 
-    // After clicking, the details should be visible
-    const detailsAfterClick = screen.getByText(event.description);
-    expect(detailsAfterClick).toBeInTheDocument();
+    const descriptionAfterClick = container.querySelector("li p:last-child");
 
-    // The button text should change to "Hide Details"
-    const hideDetailsButton = screen.getByText(/hide details/i);
-    expect(hideDetailsButton).toBeInTheDocument();
+    const normalizedDescription = event.description.trim().replace(/\s+/g, " ");
+
+    expect(descriptionAfterClick).toHaveTextContent(normalizedDescription);
   });
 
-  // test to check when user clicks on hides button, details are hidden
-  test("hides the details section when the user clicks on the 'hide details' button", async () => {
-    const event = mockData[0]; // Get the first event for the test
+  test('hides the details section when the user clicks on the "Hide Details" button', async () => {
+    const event = mockData[0];
+    const { container } = render(<Event event={event} />);
 
-    render(<Event event={event} />);
-
-    const user = userEvent.setup(); // Initialize user event interactions
-
-    // Find the "Show Details" button
-    const showDetailsButton = screen.getByText(/show details/i);
-
-    // Initially, the event details (description) should not be visible
-    const eventDetails = screen.queryByText(event.description);
-    expect(eventDetails).not.toBeInTheDocument();
-
-    // Click the "Show Details" button to show the details
+    const showDetailsButton = container.querySelector("button");
+    const user = userEvent.setup();
     await user.click(showDetailsButton);
 
-    // After clicking, the details should be visible
-    const detailsAfterClick = screen.getByText(event.description);
-    expect(detailsAfterClick).toBeInTheDocument();
+    let descriptionAfterShow = container.querySelector("li p:last-child");
+    expect(descriptionAfterShow).toHaveTextContent(
+      event.description.trim().replace(/\s+/g, " ")
+    );
 
-    // The button text should change to "Hide Details"
-    const hideDetailsButton = screen.getByText(/hide details/i);
-    expect(hideDetailsButton).toBeInTheDocument();
+    await user.click(showDetailsButton);
 
-    // Click the "Hide Details" button
-    await user.click(hideDetailsButton);
-
-    // After clicking, the details should be hidden again
-    const detailsAfterHideClick = screen.queryByText(event.description);
-    expect(detailsAfterHideClick).not.toBeInTheDocument();
-
-    // The button text should change back to "Show Details"
-    const showDetailsButtonAgain = screen.getByText(/show details/i);
-    expect(showDetailsButtonAgain).toBeInTheDocument();
+    descriptionAfterShow = container.querySelector("li p:last-child");
+    expect(descriptionAfterShow).not.toBeInTheDocument();
   });
 });

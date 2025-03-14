@@ -12,6 +12,7 @@ const CitySearch = ({ allLocations }) => {
           return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
         })
       : [];
+
     setQuery(value);
     setSuggestions(filteredLocations);
   };

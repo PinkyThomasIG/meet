@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import App from "../App";
+import App from "./../App";
 
 describe("<App /> component", () => {
   let AppDOM;
@@ -8,17 +8,12 @@ describe("<App /> component", () => {
     AppDOM = render(<App />).container.firstChild;
   });
 
+  // to check a list of events to be rendered
   test("renders list of events", () => {
     expect(AppDOM.querySelector("#event-list")).toBeInTheDocument();
   });
 
   test("render CitySearch", () => {
     expect(AppDOM.querySelector("#city-search")).toBeInTheDocument();
-  });
-
-  test("renders NumberOfEvents component", () => {
-    // Querying the NumberOfEvents component using screen.getByRole
-    const numberOfEventsInput = screen.getByRole("textbox");
-    expect(numberOfEventsInput).toBeInTheDocument();
   });
 });

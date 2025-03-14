@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 
-const NumberOfEvents = ({ updateNumberOfEvents }) => {
-  const [numberOfEvents, setNumberOfEvents] = useState(32);
+const NumberOfEvents = ({ updateEventCount }) => {
+  const [eventCount, setEventCount] = useState(32); // Default value is 32
 
-  const handleInputChange = (event) => {
-    const value = event.target.value;
-    setNumberOfEvents(value);
-    updateNumberOfEvents(value);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const numericValue = Number(value); // Convert value to number
+    if (value === "" || numericValue >= 1) {
+      // Allow empty string for clearing and numeric value >= 1
+      setEventCount(numericValue); // Update state with numeric value
+      updateEventCount(numericValue); // Pass the new event count to the parent component
+    }
   };
 
   return (
     <div id="number-of-events">
-      <label htmlFor="event-count">Number of Events: </label>
+      <label htmlFor="event-count">Number of Events</label>
       <input
-        id="event-count"
         type="number"
-        role="textbox"
-        value={numberOfEvents}
-        onChange={handleInputChange}
+        id="event-count"
+        value={eventCount}
+        onChange={handleChange}
+        aria-label="Number of events"
       />
     </div>
   );

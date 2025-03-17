@@ -5,7 +5,7 @@ import NumberOfEvents from "./components/NumberOfEvents";
 import { getEvents } from "./api";
 import { extractLocations } from "./api";
 
-import "./app.css";
+import "./App.css";
 
 const App = () => {
   const [allLocations, setAllLocations] = useState([]);

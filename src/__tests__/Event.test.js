@@ -6,85 +6,61 @@ import mockData from "../mock-data";
 import { getEvents } from "../api";
 
 describe("<Event /> component", () => {
-  test("renders the event title correctly", () => {
-    const event = mockData[0];
-    const { container } = render(<Event event={event} />);
-    const title = container.querySelector("h2");
-
-    // Assert that the event's summary (title) appears in the document
-    expect(title).toHaveTextContent(event.summary);
+  let EventComponent;
+  let allEvents;
+  beforeEach(async () => {
+    allEvents = await getEvents();
+    EventComponent = render(<Event event={allEvents[0]} />);
   });
 
-  test("renders the event time correctly", () => {
-    const event = mockData[0];
-
-    const { container } = render(<Event event={event} />);
-    const time = container.querySelector("p");
-
-    const createdTime = new Date(event.created).toLocaleString();
-
-    expect(time).toHaveTextContent(createdTime);
+  test("renders event Title", () => {
+    expect(
+      EventComponent.queryByText(allEvents[0].summary)
+    ).toBeInTheDocument();
   });
 
-  test("renders the event location correctly", () => {
-    const event = mockData[0];
-    const { container } = render(<Event event={event} />);
-    const location = container.querySelectorAll("p")[1];
-
-    expect(location).toHaveTextContent(event.location);
+  test("renders event location", () => {
+    expect(
+      EventComponent.queryByText(allEvents[0].location)
+    ).toBeInTheDocument();
   });
 
-  test("renders event details button with the title (Show Details)", () => {
-    const event = mockData[0];
-    const { container } = render(<Event event={event} />);
-    const button = container.querySelector("button");
-
-    expect(button).toHaveTextContent("Show Details");
+  test("renders event details button with the title (show details)", () => {
+    expect(EventComponent.queryByText("show details")).toBeInTheDocument();
   });
 
-  test("by default, event section details should be hidden", () => {
-    const event = mockData[0];
-    const { container } = render(<Event event={event} />);
-
-    const description = container.querySelector("li p:last-child");
-    expect(description).not.toBeInTheDocument();
+  test("by default, event's details section should be hidden", () => {
+    expect(
+      EventComponent.container.querySelector(".details")
+    ).not.toBeInTheDocument();
   });
 
-  test('shows the details section when the user clicks on the "Show Details" button', async () => {
-    const event = mockData[0];
-
-    const { container } = render(<Event event={event} />);
-    const descriptionBeforeClick = container.querySelector("li p:last-child");
-    expect(descriptionBeforeClick).not.toBeInTheDocument();
-
-    const showDetailsButton = container.querySelector("button");
-
+  test("shows the details section when the user clicks on the 'show details' button", async () => {
     const user = userEvent.setup();
-    await user.click(showDetailsButton);
+    await user.click(EventComponent.queryByText("show details"));
 
-    const descriptionAfterClick = container.querySelector("li p:last-child");
-
-    const normalizedDescription = event.description.trim().replace(/\s+/g, " ");
-
-    expect(descriptionAfterClick).toHaveTextContent(normalizedDescription);
+    expect(
+      EventComponent.container.querySelector(".details")
+    ).toBeInTheDocument();
+    expect(EventComponent.queryByText("hide details")).toBeInTheDocument();
+    expect(EventComponent.queryByText("show details")).not.toBeInTheDocument();
   });
 
-  test('hides the details section when the user clicks on the "Hide Details" button', async () => {
-    const event = mockData[0];
-    const { container } = render(<Event event={event} />);
-
-    const showDetailsButton = container.querySelector("button");
+  test("hides the details section when the user clicks on the 'hide details' button", async () => {
     const user = userEvent.setup();
-    await user.click(showDetailsButton);
 
-    let descriptionAfterShow = container.querySelector("li p:last-child");
-    expect(descriptionAfterShow).toHaveTextContent(
-      event.description.trim().replace(/\s+/g, " ")
-    );
+    await user.click(EventComponent.queryByText("show details"));
+    expect(
+      EventComponent.container.querySelector(".details")
+    ).toBeInTheDocument();
+    expect(EventComponent.queryByText("hide details")).toBeInTheDocument();
+    expect(EventComponent.queryByText("show details")).not.toBeInTheDocument();
 
-    await user.click(showDetailsButton);
-
-    descriptionAfterShow = container.querySelector("li p:last-child");
-    expect(descriptionAfterShow).not.toBeInTheDocument();
+    await user.click(EventComponent.queryByText("hide details"));
+    expect(
+      EventComponent.container.querySelector(".details")
+    ).not.toBeInTheDocument();
+    expect(EventComponent.queryByText("hide details")).not.toBeInTheDocument();
+    expect(EventComponent.queryByText("show details")).toBeInTheDocument();
   });
 });

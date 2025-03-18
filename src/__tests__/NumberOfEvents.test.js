@@ -6,8 +6,12 @@ import mockData from "../mock-data";
 
 describe("<NumberOfEvents /> component", () => {
   let NumberOfEventsComponent;
+  const mockSetCurrentNOE = jest.fn();
+
   beforeEach(() => {
-    NumberOfEventsComponent = render(<NumberOfEvents />);
+    NumberOfEventsComponent = render(
+      <NumberOfEvents setCurrentNOE={mockSetCurrentNOE} />
+    );
   });
 
   test("renders number of events text input", () => {
@@ -21,12 +25,21 @@ describe("<NumberOfEvents /> component", () => {
     expect(numberTextBox).toHaveValue("32");
   });
 
-  test("number of events text box value changes when the user types in it", async () => {
+  test("calls setCurrentNOE when user changes input", async () => {
+    const user = userEvent.setup();
+    const numberTextBox = NumberOfEventsComponent.queryByRole("textbox");
+
+    await user.type(numberTextBox, "{backspace}{backspace}10");
+
+    expect(mockSetCurrentNOE).toHaveBeenCalledWith(10);
+  });
+
+  /* test("number of events text box value changes when the user types in it", async () => {
     const user = userEvent.setup();
     const numberTextBox = NumberOfEventsComponent.queryByRole("textbox");
     await user.type(numberTextBox, "123");
 
     // 32 (the default value already written) + 123
     expect(numberTextBox).toHaveValue("32123");
-  });
+  }); */
 });

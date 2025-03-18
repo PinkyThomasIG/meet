@@ -26,9 +26,9 @@ export const extractLocations = (events) => {
  *
  * This function will fetch the list of all events
  */
-export const getEvents = async () => {
+export const getEvents = async (numEvents = 32) => {
   if (window.location.href.startsWith("http://localhost")) {
-    return mockData;
+    return mockData.slice(0, numEvents);
   }
   const token = await getAccessToken();
 
@@ -40,11 +40,18 @@ export const getEvents = async () => {
       token;
     const response = await fetch(url);
     const result = await response.json();
-    if (result) {
+    if (result && result.events) {
+      return result.events.slice(0, numEvents); // Limit events returned
+    }
+    return null;
+  }
+};
+
+/*  if (result) {
       return result.events;
     } else return null;
   }
-};
+}; */
 
 /**
  *
@@ -79,7 +86,10 @@ const getToken = async (code) => {
       encodeCode // get access token end point
   );
   const { access_token } = await response.json();
-  access_token && localStorage.setItem("access_token", access_token);
+  if (access_token) {
+    localStorage.setItem("access_token", access_token);
+  }
+  // access_token && localStorage.setItem("access_token", access_token);
 
   return access_token;
 };

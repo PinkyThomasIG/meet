@@ -18,7 +18,7 @@ defineFeature(feature, (test) => {
 
     then("each event should have its details collapsed by default", () => {
       const EventListDOM = AppComponent.container.querySelector("#event-list");
-      const EventItems = within(EventListDOM).queryAllByRole("listitem");
+      const EventItems = EventListDOM.querySelectorAll("li"); // Directly query 'li' elements inside the event list
       EventItems.forEach((event) => {
         expect(
           within(event).queryByTestId("event-details")
@@ -29,20 +29,20 @@ defineFeature(feature, (test) => {
 
   test("User can expand an event to see details", ({ given, when, then }) => {
     let AppComponent;
-    given("User can expand an event to see details", () => {
+    given("the user is viewing a list of events", () => {
       AppComponent = render(<App />);
     });
 
     when("the user clicks on an event", async () => {
       const user = userEvent.setup();
       const EventListDOM = AppComponent.container.querySelector("#event-list");
-      const firstEvent = within(EventListDOM).getAllByRole("listitem")[0];
+      const firstEvent = EventListDOM.querySelectorAll("li")[0]; // Query all 'li' elements directly
       await user.click(within(firstEvent).getByRole("button"));
     });
 
     then("the event details should expand and become visible", () => {
       const EventListDOM = AppComponent.container.querySelector("#event-list");
-      const firstEvent = within(EventListDOM).getAllByRole("listitem")[0];
+      const firstEvent = EventListDOM.querySelectorAll("li")[0];
       expect(
         within(firstEvent).getByTestId("event-details")
       ).toBeInTheDocument();
@@ -59,14 +59,14 @@ defineFeature(feature, (test) => {
       AppComponent = render(<App />);
       const user = userEvent.setup();
       const EventListDOM = AppComponent.container.querySelector("#event-list");
-      const firstEvent = within(EventListDOM).getAllByRole("listitem")[0];
+      const firstEvent = EventListDOM.querySelectorAll("li")[0];
       await user.click(within(firstEvent).getByRole("button"));
     });
 
     when("the user clicks on the event again to collapse it", async () => {
       const user = userEvent.setup();
       const EventListDOM = AppComponent.container.querySelector("#event-list");
-      const firstEvent = within(EventListDOM).getAllByRole("listitem")[0];
+      const firstEvent = EventListDOM.querySelectorAll("li")[0];
       await user.click(within(firstEvent).getByRole("button"));
     });
 
@@ -75,7 +75,7 @@ defineFeature(feature, (test) => {
       () => {
         const EventListDOM =
           AppComponent.container.querySelector("#event-list");
-        const firstEvent = within(EventListDOM).getAllByRole("listitem")[0];
+        const firstEvent = EventListDOM.querySelectorAll("li")[0];
         expect(
           within(firstEvent).queryByTestId("event-details")
         ).not.toBeInTheDocument();

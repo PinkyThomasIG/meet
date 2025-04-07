@@ -25,7 +25,9 @@ defineFeature(feature, (test) => {
 
     then("32 events should be displayed by default", async () => {
       const EventListDOM = AppComponent.container.querySelector("#event-list");
-      const EventListItems = within(EventListDOM).queryAllByRole("listitem");
+      const EventListItems = await within(EventListDOM).findAllByRole(
+        "listitem"
+      );
       expect(EventListItems.length).toBe(32);
     });
   });

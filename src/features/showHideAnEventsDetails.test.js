@@ -5,9 +5,7 @@ import App from "../App";
 import Event from "../components/Event";
 import userEvent from "@testing-library/user-event";
 
-const feature = loadFeature(
-  "./src/__tests__/features/showHideAnEventsDetails.feature"
-);
+const feature = loadFeature("./src/features/showHideAnEventsDetails.feature");
 
 defineFeature(feature, (test) => {
   test("An event element is collapsed by default", ({ given, when, then }) => {
@@ -28,6 +26,7 @@ defineFeature(feature, (test) => {
       });
     });
   });
+
   test("User can expand an event to see details", ({ given, when, then }) => {
     let AppComponent;
     given("User can expand an event to see details", () => {

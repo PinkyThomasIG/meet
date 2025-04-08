@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744012025845" clover="3.2.0">
-  <project timestamp="1744012025846" name="All files">
-    <metrics statements="96" coveredstatements="60" conditionals="47" coveredconditionals="23" methods="24" coveredmethods="20" elements="167" coveredelements="103" complexity="0" loc="96" ncloc="96" packages="2" files="7" classes="7"/>
+<coverage generated="1744111781816" clover="3.2.0">
+  <project timestamp="1744111781817" name="All files">
+    <metrics statements="119" coveredstatements="78" conditionals="58" coveredconditionals="32" methods="29" coveredmethods="23" elements="206" coveredelements="133" complexity="0" loc="119" ncloc="119" packages="2" files="8" classes="8"/>
     <package name="src">
-      <metrics statements="62" coveredstatements="26" conditionals="27" coveredconditionals="4" methods="11" coveredmethods="7"/>
+      <metrics statements="64" coveredstatements="28" conditionals="31" coveredconditionals="7" methods="11" coveredmethods="7"/>
       <file name="App.jsx" path="C:\Users\Abz Monster\Documents\careerfoundry\meet\src\App.jsx">
-        <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
-        <line num="10" count="6" type="stmt"/>
-        <line num="11" count="46" type="stmt"/>
-        <line num="12" count="42" type="stmt"/>
-        <line num="13" count="42" type="stmt"/>
-        <line num="14" count="42" type="stmt"/>
-        <line num="16" count="42" type="stmt"/>
-        <line num="17" count="24" type="stmt"/>
-        <line num="20" count="42" type="stmt"/>
-        <line num="21" count="24" type="stmt"/>
-        <line num="23" count="24" type="cond" truecount="2" falsecount="0"/>
-        <line num="25" count="64" type="stmt"/>
-        <line num="26" count="24" type="stmt"/>
-        <line num="27" count="24" type="stmt"/>
-        <line num="30" count="42" type="stmt"/>
+        <metrics statements="16" coveredstatements="16" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="12" count="37" type="stmt"/>
+        <line num="13" count="33" type="stmt"/>
+        <line num="14" count="33" type="stmt"/>
+        <line num="15" count="33" type="stmt"/>
+        <line num="16" count="33" type="stmt"/>
+        <line num="17" count="33" type="stmt"/>
+        <line num="19" count="33" type="stmt"/>
+        <line num="20" count="18" type="stmt"/>
+        <line num="23" count="33" type="stmt"/>
+        <line num="24" count="18" type="stmt"/>
+        <line num="26" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="64" type="stmt"/>
+        <line num="29" count="18" type="stmt"/>
+        <line num="30" count="18" type="stmt"/>
+        <line num="33" count="33" type="stmt"/>
       </file>
       <file name="api.js" path="C:\Users\Abz Monster\Documents\careerfoundry\meet\src\api.js">
         <metrics statements="47" coveredstatements="11" conditionals="25" coveredconditionals="2" methods="7" coveredmethods="3"/>
@@ -28,12 +30,12 @@
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="19" count="7" type="stmt"/>
-        <line num="20" count="864" type="stmt"/>
-        <line num="21" count="27" type="stmt"/>
-        <line num="22" count="27" type="stmt"/>
+        <line num="20" count="672" type="stmt"/>
+        <line num="21" count="21" type="stmt"/>
+        <line num="22" count="21" type="stmt"/>
         <line num="29" count="7" type="cond" truecount="1" falsecount="0"/>
-        <line num="30" count="36" type="cond" truecount="1" falsecount="1"/>
-        <line num="31" count="36" type="stmt"/>
+        <line num="30" count="30" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="30" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="36" count="0" type="stmt"/>
@@ -77,52 +79,76 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="34" coveredstatements="34" conditionals="20" coveredconditionals="19" methods="13" coveredmethods="13"/>
+      <metrics statements="55" coveredstatements="50" conditionals="27" coveredconditionals="25" methods="18" coveredmethods="16"/>
+      <file name="Alert.jsx" path="C:\Users\Abz Monster\Documents\careerfoundry\meet\src\components\Alert.jsx">
+        <metrics statements="12" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="3"/>
+        <line num="5" count="8" type="stmt"/>
+        <line num="6" count="8" type="stmt"/>
+        <line num="7" count="8" type="stmt"/>
+        <line num="9" count="8" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="25" count="8" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+      </file>
       <file name="CitySearch.jsx" path="C:\Users\Abz Monster\Documents\careerfoundry\meet\src\components\CitySearch.jsx">
-        <metrics statements="20" coveredstatements="20" conditionals="4" coveredconditionals="3" methods="7" coveredmethods="7"/>
+        <metrics statements="25" coveredstatements="24" conditionals="6" coveredconditionals="4" methods="7" coveredmethods="7"/>
         <line num="3" count="6" type="stmt"/>
-        <line num="4" count="118" type="stmt"/>
-        <line num="5" count="118" type="stmt"/>
-        <line num="6" count="118" type="stmt"/>
-        <line num="8" count="118" type="stmt"/>
-        <line num="9" count="31" type="stmt"/>
-        <line num="12" count="118" type="stmt"/>
+        <line num="4" count="108" type="stmt"/>
+        <line num="5" count="108" type="stmt"/>
+        <line num="6" count="108" type="stmt"/>
+        <line num="8" count="108" type="stmt"/>
+        <line num="9" count="30" type="stmt"/>
+        <line num="12" count="108" type="stmt"/>
         <line num="13" count="30" type="stmt"/>
         <line num="14" count="30" type="cond" truecount="1" falsecount="1"/>
         <line num="16" count="60" type="stmt"/>
         <line num="19" count="30" type="stmt"/>
         <line num="20" count="30" type="stmt"/>
-        <line num="23" count="118" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
-        <line num="26" count="3" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="30" count="118" type="stmt"/>
-        <line num="37" count="7" type="stmt"/>
-        <line num="43" count="42" type="stmt"/>
+        <line num="24" count="30" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="30" type="stmt"/>
+        <line num="30" count="30" type="stmt"/>
+        <line num="33" count="108" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="41" count="108" type="stmt"/>
+        <line num="48" count="7" type="stmt"/>
+        <line num="54" count="42" type="stmt"/>
       </file>
       <file name="Event.jsx" path="C:\Users\Abz Monster\Documents\careerfoundry\meet\src\components\Event.jsx">
         <metrics statements="4" coveredstatements="4" conditionals="14" coveredconditionals="14" methods="2" coveredmethods="2"/>
         <line num="3" count="7" type="stmt"/>
-        <line num="4" count="487" type="stmt"/>
-        <line num="5" count="487" type="stmt"/>
+        <line num="4" count="466" type="stmt"/>
+        <line num="5" count="466" type="stmt"/>
         <line num="16" count="3" type="cond" truecount="2" falsecount="0"/>
       </file>
       <file name="EventList.jsx" path="C:\Users\Abz Monster\Documents\careerfoundry\meet\src\components\EventList.jsx">
         <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="4" count="6" type="stmt"/>
-        <line num="5" count="45" type="stmt"/>
-        <line num="8" count="478" type="stmt"/>
+        <line num="5" count="36" type="stmt"/>
+        <line num="8" count="457" type="stmt"/>
       </file>
       <file name="NumberOfEvents.jsx" path="C:\Users\Abz Monster\Documents\careerfoundry\meet\src\components\NumberOfEvents.jsx">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="11" coveredstatements="11" conditionals="5" coveredconditionals="5" methods="2" coveredmethods="2"/>
         <line num="3" count="7" type="stmt"/>
-        <line num="4" count="49" type="stmt"/>
-        <line num="6" count="49" type="stmt"/>
-        <line num="7" count="11" type="stmt"/>
-        <line num="8" count="11" type="stmt"/>
-        <line num="9" count="11" type="stmt"/>
-        <line num="12" count="49" type="stmt"/>
+        <line num="4" count="55" type="stmt"/>
+        <line num="6" count="55" type="stmt"/>
+        <line num="7" count="19" type="stmt"/>
+        <line num="11" count="19" type="cond" truecount="5" falsecount="0"/>
+        <line num="12" count="15" type="stmt"/>
+        <line num="15" count="15" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="21" count="19" type="stmt"/>
+        <line num="24" count="55" type="stmt"/>
       </file>
     </package>
   </project>

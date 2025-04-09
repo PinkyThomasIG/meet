@@ -1,4 +1,4 @@
-import nProgress from "nprogress";
+import NProgress from "nprogress";
 import mockData from "./mock-data";
 
 const checkToken = async (accessToken) => {

@@ -1,3 +1,4 @@
+import nProgress from "nprogress";
 import mockData from "./mock-data";
 
 const checkToken = async (accessToken) => {
@@ -30,6 +31,13 @@ export const getEvents = async (numEvents = 32) => {
   if (window.location.href.startsWith("http://localhost")) {
     return mockData.slice(0, numEvents);
   }
+
+  if (!navigator.onLine) {
+    const events = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return events ? JSON.parse(events).slice(0, numEvents) : [];
+  }
+
   const token = await getAccessToken();
 
   if (token) {
@@ -40,10 +48,14 @@ export const getEvents = async (numEvents = 32) => {
       token;
     const response = await fetch(url);
     const result = await response.json();
-    if (result && result.events) {
+    /*if (result && result.events) {
       return result.events.slice(0, numEvents); // Limit events returned
-    }
-    return null;
+    }*/
+    if (result) {
+      NProgress.done();
+      localStorage.setItem("lastEvents", JSON.stringify(result.events));
+      return result.events;
+    } else return null;
   }
 };
 

@@ -93,3 +93,15 @@ input[type="number"] {
   width: 250px;
   z-index: 1000;
 }
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns for the charts */
+  gap: 20px; /* Space between the charts */
+  margin-bottom: 20px; /* Optional, to give some space below the charts */
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr; /* One column layout for smaller screens */
+  }
+}
